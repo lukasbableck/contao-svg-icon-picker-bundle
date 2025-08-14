@@ -1,0 +1,1 @@
+# contao-svg-icon-picker-bundle

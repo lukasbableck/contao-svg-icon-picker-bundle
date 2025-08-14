@@ -1,0 +1,12 @@
+{
+  "entrypoints": {
+    "backend": {
+      "css": [
+        "/bundles/contaosvgiconpicker/backend.css"
+      ],
+      "js": [
+        "/bundles/contaosvgiconpicker/backend.js"
+      ]
+    }
+  }
+}
