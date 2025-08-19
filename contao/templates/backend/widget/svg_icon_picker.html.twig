@@ -1,8 +1,8 @@
 <div class="svg-icon-picker" id="{{ id }}" data-controller="svg-icon-picker">
 	<input type="hidden" name="{{ name }}" id="ctrl_{{ id }}" value="{{ value }}"/>
 	<div class="selected-icon">
-		{% if iconValue %}
-			{{ iconValue|raw }}
+		{% if value %}
+			{{ svg_icon(value) }}
 		{% endif %}
 	</div>
 	<div class="edit-button">
@@ -10,21 +10,23 @@
 			{{ 'edit'|trans({}, 'contao_svg_icon_picker') }}
 		</button>
 	</div>
-	<div class="picker-container">
-		<div class="search">
-			<label for="{{ id }}_search">{{ 'search'|trans({}, 'contao_svg_icon_picker') }}</label>
-			<input type="text" id="{{ id }}_search" class="tl_text" data-action="keyup->svg-icon-picker#filterIcons"/>
-		</div>
-		<div class="icon-selector">
-			<div class="icon-item" data-value="" data-icon-name="" data-action="click->svg-icon-picker#reset"></div>
-			{% for key, icon in icons %}
-				<div class="icon-item" data-value="{{ icon.path }}" data-icon-name="{{ key }}" data-search-terms="{{ icon.searchterms|default([])|json_encode }}" data-action="click->svg-icon-picker#selectIcon">
-					<div class="icon">
-						{{ icon.content|raw }}
+	{% cache "svg_icon_picker_" ~ sourceDirectory|default ttl(60) %}
+		<div class="picker-container">
+			<div class="search">
+				<label for="{{ id }}_search">{{ 'search'|trans({}, 'contao_svg_icon_picker') }}</label>
+				<input type="text" id="{{ id }}_search" class="tl_text" data-action="keyup->svg-icon-picker#filterIcons"/>
+			</div>
+			<div class="icon-selector">
+				<div class="icon-item" data-value="" data-icon-name="" data-action="click->svg-icon-picker#reset"></div>
+				{% for key, icon in icons %}
+					<div class="icon-item" data-value="{{ icon.path }}" data-icon-name="{{ key }}" data-search-terms="{{ icon.searchterms|default([])|json_encode }}" data-action="click->svg-icon-picker#selectIcon">
+						<div class="icon">
+							{{ icon.content|raw }}
+						</div>
+						<span class="label">{{ icon.label|default(key) }}</span>
 					</div>
-					<span class="label">{{ icon.label|default(key) }}</span>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
-	</div>
+	{% endcache %}
 </div>

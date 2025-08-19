@@ -30,9 +30,9 @@ class SVGIconPicker extends Widget {
 				'id' => $this->strId,
 				'name' => $this->strName,
 				'value' => $this->value,
-				'iconValue' => $this->value ? file_get_contents(System::getContainer()->getParameter('kernel.project_dir').'/'.ltrim($this->value, '/')) : '',
 				'label' => $this->strLabel,
 				'required' => $this->blnMandatory,
+				'sourceDirectory' => $this->sourceDirectory,
 				'tags' => $this->getAttributes(),
 				'icons' => $icons,
 			]
