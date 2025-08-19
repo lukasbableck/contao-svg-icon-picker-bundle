@@ -3,11 +3,12 @@ namespace Lukasbableck\ContaoSVGIconPickerBundle\Twig;
 
 use enshrined\svgSanitize\Sanitizer;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 class Extension extends AbstractExtension {
 	public function getFunctions(): array {
 		return [
-			new \Twig\TwigFunction('svg_icon', [$this, 'renderSVG']),
+			new TwigFunction('svg_icon', [$this, 'renderSVG'], ['is_safe' => ['html']]),
 		];
 	}
 
