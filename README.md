@@ -19,7 +19,7 @@ Create a field in your DCA/RSCE/...
 
 Put your SVG icons in the specified `sourceDirectory`. \
 Icon metadata like search terms and labels can be provided via an icons.json, which has to be placed in the `metadataDirectory`. Providing metadata is completely optional. \
-Currently only an icons.json file in the scheme of the FontAwesome icons.json is supported. \
+Currently only an icons.json file in the scheme of the [FontAwesome icons.json](https://github.com/FortAwesome/Font-Awesome/blob/7.x/metadata/icons.json) is supported. \
 Glyphs are not supported yet.
 
 ## Usage 
