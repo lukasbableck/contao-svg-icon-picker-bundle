@@ -35,7 +35,7 @@ class SVGIconProvider {
 				'path' => ltrim(str_replace($this->projectDir, '', $file), '/'),
 				'content' => file_get_contents($file),
 			];
-			if ($metadata && isset($metadata['icons'][$filename])) {
+			if (null !== $metadata && isset($metadata['icons'][$filename])) {
 				$icon['label'] = $metadata['icons'][$filename]['label'] ?? null;
 				$icon['searchterms'] = $metadata['icons'][$filename]['search']['terms'] ?? [];
 			}
@@ -47,12 +47,12 @@ class SVGIconProvider {
 		$this->cache[$sourceDirectory] = $icons;
 	}
 
-	private function getMetadata(string $metadataDirectory) {
+	private function getMetadata(string $metadataDirectory): ?array {
 		if (!$metadataDirectory) {
 			return null;
 		}
 
-		$metadataDirectory = rtrim($this->projectDir, '/').'/'.ltrim($metadataDirectory, '/');
+		$metadataDirectory = rtrim($this->projectDir, '/').'/'.trim($metadataDirectory, '/');
 		if (!is_dir($metadataDirectory)) {
 			throw new \RuntimeException(\sprintf('The metadata directory "%s" does not exist.', $metadataDirectory));
 		}

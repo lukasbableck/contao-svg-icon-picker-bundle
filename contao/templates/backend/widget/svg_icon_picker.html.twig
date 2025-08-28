@@ -1,3 +1,5 @@
+!{% trans_default_domain 'contao_svg_icon_picker' %}
+
 <div class="svg-icon-picker" id="{{ id }}" data-controller="svg-icon-picker">
 	<input type="hidden" name="{{ name }}" id="ctrl_{{ id }}" value="{{ value }}"/>
 	<div class="selected-icon">
@@ -7,13 +9,13 @@
 	</div>
 	<div class="edit-button">
 		<button type="button" class="tl_submit" data-action="svg-icon-picker#togglePicker">
-			{{ 'edit'|trans({}, 'contao_svg_icon_picker') }}
+			{{ 'edit'|trans }}
 		</button>
 	</div>
-	{% cache "svg_icon_picker_" ~ sourceDirectory|default ttl(60) %}
+	{% cache 'svg_icon_picker_' ~ sourceDirectory|default ttl(60) %}
 		<div class="picker-container">
 			<div class="search">
-				<label for="{{ id }}_search">{{ 'search'|trans({}, 'contao_svg_icon_picker') }}</label>
+				<label for="{{ id }}_search">{{ 'search'|trans }}</label>
 				<input type="text" id="{{ id }}_search" class="tl_text" data-action="keyup->svg-icon-picker#filterIcons"/>
 			</div>
 			<div class="icon-selector">
