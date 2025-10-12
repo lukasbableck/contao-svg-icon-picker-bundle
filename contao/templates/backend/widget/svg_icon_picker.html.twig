@@ -12,7 +12,7 @@
 			{{ 'edit'|trans }}
 		</button>
 	</div>
-	{% cache 'svg_icon_picker_' ~ sourceDirectory|default ttl(60) %}
+	{% cache 'svg_icon_picker_' ~ sourceDirectory|default|replace({'/': '_'}) ttl(60) %}
 		<div class="picker-container">
 			<div class="search">
 				<label for="{{ id }}_search">{{ 'search'|trans }}</label>
