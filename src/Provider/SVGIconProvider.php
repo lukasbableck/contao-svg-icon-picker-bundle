@@ -47,7 +47,7 @@ class SVGIconProvider {
 		$this->cache[$sourceDirectory] = $icons;
 	}
 
-	private function getMetadata(string $metadataDirectory): ?array {
+	private function getMetadata(?string $metadataDirectory): ?array {
 		if (!$metadataDirectory) {
 			return null;
 		}
