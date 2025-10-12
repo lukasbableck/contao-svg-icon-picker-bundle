@@ -13,9 +13,12 @@ class Extension extends AbstractExtension {
 	}
 
 	public function renderSVG(string $path): string {
-		$svgContent = file_get_contents($path);
+		$svgContent = @file_get_contents($path);
 		if (false === $svgContent) {
-			throw new \RuntimeException("Could not read SVG file at path: $path");
+			$svgContent = @file_get_contents(str_replace('public/', '', $path));
+			if (false === $svgContent) {
+				throw new \RuntimeException("Could not read SVG file at path: $path");
+			}
 		}
 
 		$sanitizer = new Sanitizer();
