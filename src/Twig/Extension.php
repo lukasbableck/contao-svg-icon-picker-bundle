@@ -21,9 +21,9 @@ class Extension extends AbstractExtension {
     }
 
     public function renderSVG(string $path): string {
-        $svgContent = @file_get_contents(Path::join($this->projectDir, ltrim($path, '/')));
+        $svgContent = @file_get_contents(Path::join($this->projectDir, $path));
         if (false === $svgContent) {
-            $svgContent = @file_get_contents(Path::join($this->projectDir, str_replace('public/', '', ltrim($path, '/'))));
+            $svgContent = @file_get_contents(Path::join($this->projectDir, str_replace('public/', '', $path)));
             if (false === $svgContent) {
                 throw new \RuntimeException("Could not read SVG file at path: $path");
             }
