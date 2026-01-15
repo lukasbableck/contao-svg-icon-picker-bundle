@@ -44,6 +44,8 @@
             display: grid;
             gap: 1px;
             grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+            max-height: 600px;
+            overflow: auto;
             .icon-item {
                 background-color: var(--form-bg);
                 cursor: pointer;
