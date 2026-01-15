@@ -24,18 +24,36 @@
         display: none;
         margin-block-start: 0.25rem;
         width: 100%;
-        .search {
+        .header {
             display: flex;
             flex-flow: row nowrap;
-            gap: 1rem;
-            align-items: center;
-            padding: 0.25rem 1rem;
-            label {
-                font-weight: 500;
+            justify-content: space-between;
+            .search {
+                display: flex;
+                flex-flow: row nowrap;
+                gap: 1rem;
+                align-items: center;
+                padding: 0.25rem 1rem;
+                label {
+                    font-weight: 500;
+                }
+                .tl_text {
+                    background-color: var(--form-bg);
+                    max-width: 250px;
+                }
             }
-            .tl_text {
-                background-color: var(--form-bg);
-                max-width: 250px;
+            button.close {
+                appearance: none;
+                background-color: transparent;
+                border: none;
+                border-left: 1px solid var(--content-border);
+                height: stretch;
+                transition: background 0.2s ease;
+                width: 44px;
+                &:hover {
+                    background-color: var(--form-button-hover);
+                    cursor: pointer;
+                }
             }
         }
         .icon-selector {

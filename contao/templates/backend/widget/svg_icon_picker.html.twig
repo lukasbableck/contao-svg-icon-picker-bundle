@@ -14,9 +14,14 @@
     </div>
     {% cache 'svg_icon_picker_' ~ sourceDirectory|default|replace({'/': '_'}) ttl(60) %}
         <div class="picker-container">
-            <div class="search">
-                <label for="{{ id }}_search">{{ 'search'|trans }}</label>
-                <input type="text" id="{{ id }}_search" class="tl_text" data-action="keyup->svg-icon-picker#filterIcons"/>
+            <div class="header">
+                <div class="search">
+                    <label for="{{ id }}_search">{{ 'search'|trans }}</label>
+                    <input type="text" id="{{ id }}_search" class="tl_text" data-action="keyup->svg-icon-picker#filterIcons"/>
+                </div>
+                <button type="button" class="close" data-action="svg-icon-picker#togglePicker" aria-label="{{ 'close'|trans }}">
+                    ✕
+                </button>
             </div>
             <div class="icon-selector">
                 <div class="icon-item" data-value="" data-icon-name="" data-action="click->svg-icon-picker#reset"></div>
