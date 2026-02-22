@@ -3,9 +3,10 @@ namespace Lukasbableck\ContaoSVGIconPickerBundle\Widget\Backend;
 
 use Contao\System;
 use Contao\Widget;
-use Lukasbableck\ContaoSVGIconPickerBundle\Provider\SVGIconProvider;
+use Lukasbableck\ContaoSVGIconPickerBundle\Controller\IconListController;
 use Symfony\Component\Asset\Package;
 use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SVGIconPicker extends Widget {
     protected $blnSubmitInput = true;
@@ -17,10 +18,19 @@ class SVGIconPicker extends Widget {
             throw new \RuntimeException('The sourceDirectory option is required for the SVGIconPicker widget.');
         }
 
-        $twig = System::getContainer()->get('twig');
-        $provider = System::getContainer()->get(SVGIconProvider::class);
+        $container = System::getContainer();
+        $twig = $container->get('twig');
+        $router = $container->get('router');
 
-        $icons = $provider->getIcons($this->sourceDirectory, $this->metadataDirectory);
+        $frameId = 'svg-icon-picker-'.hash('xxh3', $this->sourceDirectory);
+
+        $queryParams = ['sourceDirectory' => $this->sourceDirectory];
+
+        if ($this->metadataDirectory) {
+            $queryParams['metadataDirectory'] = $this->metadataDirectory;
+        }
+
+        $frameUrl = $router->generate(IconListController::class, $queryParams, UrlGeneratorInterface::ABSOLUTE_PATH);
 
         $this->addAssets();
 
@@ -32,9 +42,9 @@ class SVGIconPicker extends Widget {
                 'value' => $this->value,
                 'label' => $this->strLabel,
                 'required' => $this->blnMandatory,
-                'sourceDirectory' => $this->sourceDirectory,
+                'frameId' => $frameId,
+                'frameUrl' => $frameUrl,
                 'tags' => $this->getAttributes(),
-                'icons' => $icons,
             ]
         );
     }

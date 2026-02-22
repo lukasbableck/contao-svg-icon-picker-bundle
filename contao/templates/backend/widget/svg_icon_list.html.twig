@@ -1,0 +1,13 @@
+<turbo-frame id="{{ frameId }}">
+    <div class="icon-selector">
+        <div class="icon-item" data-value="" data-icon-name="" data-action="click->svg-icon-picker#reset"></div>
+        {% for key, icon in icons %}
+            <div class="icon-item" data-value="{{ icon.path }}" data-icon-name="{{ key }}" data-search-terms="{{ icon.searchterms|default([])|json_encode }}" data-action="click->svg-icon-picker#selectIcon">
+                <div class="icon">
+                    {{ icon.content|raw }}
+                </div>
+                <span class="label">{{ icon.label|default(key) }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</turbo-frame>

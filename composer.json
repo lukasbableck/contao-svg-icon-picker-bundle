@@ -6,6 +6,8 @@
 		"svg",
 		"icon",
 		"fontawesome",
+		"tabler",
+		"lucide",
 		"picker"
 	],
     "license": "LGPL-3.0-or-later",
@@ -17,13 +19,17 @@
 		}
 	],
     "require": {
-        "php": "^8.1",
-        "contao/core-bundle": "^5.3",
+        "php": "^8.3",
+        "contao/core-bundle": "^5.7",
         "enshrined/svg-sanitize": "^0.22",
-        "symfony/asset": "^6.4 || ^7.0",
-        "symfony/dependency-injection": "^6.4 || ^7.0",
-        "symfony/http-kernel": "^6.4 || ^7.0",
-        "twig/cache-extra": "^3.10",
+        "symfony/asset": "^7.4",
+        "symfony/config": "^7.4",
+        "symfony/dependency-injection": "^7.4",
+        "symfony/event-dispatcher": "^7.4",
+        "symfony/filesystem": "^7.4",
+        "symfony/http-foundation": "^7.4",
+        "symfony/http-kernel": "^7.4",
+        "symfony/routing": "^7.4",
         "twig/twig": "^3.10"
     },
 	"conflict": {

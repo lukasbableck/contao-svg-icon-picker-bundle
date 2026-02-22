@@ -56,6 +56,10 @@
                 }
             }
         }
+        .error{
+            color: var(--red);
+            padding: 1rem;
+        }
         .icon-selector {
             background-color: var(--panel-bg);
             border-top: 1px solid var(--content-border);
@@ -97,8 +101,30 @@
                 }
             }
         }
+        turbo-frame {
+            background-color: var(--form-bg);
+            display: block !important;
+            &:has(.loading-spinner) {
+                padding-block: 1rem;
+            }
+        }
+        .loading-spinner {
+            border: 3px solid var(--content-border);
+            border-top-color: var(--contao);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            animation: spin 0.8s linear infinite;
+            margin-inline: auto;
+        }
         &.active {
             display: block;
         }
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }

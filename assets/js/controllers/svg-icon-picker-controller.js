@@ -1,18 +1,14 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    selectedIcon = this.element.querySelector('.selected-icon');
-    inputField = this.element.querySelector('input[type="hidden"]');
-    picker = this.element.querySelector('.picker-container');
-
     connect() {
         if (this.inputField.value) {
-            this.setActiveIcon(this.inputField.value);
+            this._waitForFrame().then(() => this._setActiveIcon(this.inputField.value));
         }
     }
 
     togglePicker() {
-        this.picker.classList.toggle('active');
+        this.element.querySelector('.picker-container').classList.toggle('active');
     }
 
     filterIcons(event) {
@@ -20,7 +16,8 @@ export default class extends Controller {
         const icons = this.element.querySelectorAll('.icon-item');
         icons.forEach((icon) => {
             const iconName = icon.getAttribute('data-icon-name').toLowerCase();
-            const searchterms = JSON.parse(icon.getAttribute('data-search-terms')) || [];
+            const searchTermsAttr = icon.getAttribute('data-search-terms');
+            const searchterms = searchTermsAttr ? JSON.parse(searchTermsAttr) : [];
             if (searchterms.some((term) => term.toLowerCase().includes(searchTerm)) || iconName.includes(searchTerm)) {
                 icon.style.display = '';
             } else {
@@ -39,15 +36,23 @@ export default class extends Controller {
 
     selectIcon(event) {
         const selectedIcon = event.currentTarget;
-        this.setActiveIcon(selectedIcon.dataset.value);
-        this.setSelectedIcon(selectedIcon);
+        this._setActiveIcon(selectedIcon.dataset.value);
+        this._setSelectedIcon(selectedIcon);
     }
 
-    setActiveIcon(value) {
+    get selectedIcon() {
+        return this.element.querySelector('.selected-icon');
+    }
+
+    get inputField() {
+        return this.element.querySelector('input[type="hidden"]');
+    }
+
+    _setActiveIcon(value) {
         this.inputField.value = value;
 
         this.element.querySelectorAll('.icon-item').forEach((i) => {
-            if (i.dataset.value == value) {
+            if (i.dataset.value === value) {
                 i.classList.add('active');
                 return;
             }
@@ -55,7 +60,24 @@ export default class extends Controller {
         });
     }
 
-    setSelectedIcon(icon) {
+    _setSelectedIcon(icon) {
         this.selectedIcon.innerHTML = icon.querySelector('.icon').innerHTML;
+    }
+
+    _waitForFrame() {
+        return new Promise((resolve) => {
+            const frame = this.element.querySelector('turbo-frame');
+            if (!frame) {
+                resolve();
+                return;
+            }
+
+            if (frame.querySelector('.icon-selector')) {
+                resolve();
+                return;
+            }
+
+            frame.addEventListener('turbo:frame-load', () => resolve(), { once: true });
+        });
     }
 }

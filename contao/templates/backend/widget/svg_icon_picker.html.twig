@@ -12,28 +12,18 @@
             {{ 'edit'|trans }}
         </button>
     </div>
-    {% cache 'svg_icon_picker_' ~ sourceDirectory|default|replace({'/': '_'}) ttl(60) %}
-        <div class="picker-container">
-            <div class="header">
-                <div class="search">
-                    <label for="{{ id }}_search">{{ 'search'|trans }}</label>
-                    <input type="text" id="{{ id }}_search" class="tl_text" data-action="keyup->svg-icon-picker#filterIcons"/>
-                </div>
-                <button type="button" class="close" data-action="svg-icon-picker#togglePicker" aria-label="{{ 'close'|trans }}">
-                    ✕
-                </button>
+    <div class="picker-container">
+        <div class="header">
+            <div class="search">
+                <label for="{{ id }}_search">{{ 'search'|trans }}</label>
+                <input type="text" id="{{ id }}_search" class="tl_text" data-action="keyup->svg-icon-picker#filterIcons"/>
             </div>
-            <div class="icon-selector">
-                <div class="icon-item" data-value="" data-icon-name="" data-action="click->svg-icon-picker#reset"></div>
-                {% for key, icon in icons %}
-                    <div class="icon-item" data-value="{{ icon.path }}" data-icon-name="{{ key }}" data-search-terms="{{ icon.searchterms|default([])|json_encode }}" data-action="click->svg-icon-picker#selectIcon">
-                        <div class="icon">
-                            {{ icon.content|raw }}
-                        </div>
-                        <span class="label">{{ icon.label|default(key) }}</span>
-                    </div>
-                {% endfor %}
-            </div>
+            <button type="button" class="close" data-action="svg-icon-picker#togglePicker" aria-label="{{ 'close'|trans }}">
+                ✕
+            </button>
         </div>
-    {% endcache %}
+        <turbo-frame id="{{ frameId }}" src="{{ frameUrl }}" loading="lazy">
+            <div class="loading-spinner"></div>
+        </turbo-frame>
+    </div>
 </div>
