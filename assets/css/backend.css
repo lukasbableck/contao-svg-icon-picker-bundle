@@ -99,6 +99,14 @@
                 &.active {
                     background-color: var(--active-bg);
                 }
+                &.match:not(.empty){
+                    .label{
+                        opacity: 1;
+                    }
+                    outline: 2px solid var(--contao);
+                    outline-offset: -2px;
+                    order: -1;
+                }
             }
         }
         turbo-frame {

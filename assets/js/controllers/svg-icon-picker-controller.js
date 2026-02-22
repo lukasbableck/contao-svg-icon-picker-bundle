@@ -19,6 +19,11 @@ export default class extends Controller {
             const searchTermsAttr = icon.getAttribute('data-search-terms');
             const searchterms = searchTermsAttr ? JSON.parse(searchTermsAttr) : [];
             if (searchterms.some((term) => term.toLowerCase().includes(searchTerm)) || iconName.includes(searchTerm)) {
+                if(searchterms.some((term) => term.toLowerCase() == searchTerm) || iconName === searchTerm) {
+                    icon.classList.add('match');
+                } else {
+                    icon.classList.remove('match');
+                }
                 icon.style.display = '';
             } else {
                 icon.style.display = 'none';

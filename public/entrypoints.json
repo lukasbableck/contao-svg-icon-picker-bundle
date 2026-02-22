@@ -2,10 +2,10 @@
   "entrypoints": {
     "backend": {
       "css": [
-        "/bundles/contaosvgiconpicker/backend.css"
+        "/bundles/contaosvgiconpicker/backend.e5816039.css"
       ],
       "js": [
-        "/bundles/contaosvgiconpicker/backend.js"
+        "/bundles/contaosvgiconpicker/backend.d0ff52d5.js"
       ]
     }
   }
