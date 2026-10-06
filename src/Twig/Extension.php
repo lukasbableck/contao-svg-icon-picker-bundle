@@ -30,6 +30,9 @@ class Extension extends AbstractExtension {
         }
 
         $sanitizer = new Sanitizer();
+        $sanitizer->minify(true);
+        $sanitizer->removeRemoteReferences(true);
+        $sanitizer->removeXMLTag(true);
         $svgContent = $sanitizer->sanitize($svgContent);
 
         if (false === $svgContent) {
