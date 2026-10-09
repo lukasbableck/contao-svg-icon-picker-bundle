@@ -21,7 +21,7 @@
     "require": {
         "php": "^8.3",
         "contao/core-bundle": "^5.7 || ^6.0",
-        "enshrined/svg-sanitize": "^0.22",
+        "enshrined/svg-sanitize": "^1.0",
         "symfony/asset": "^7.4 || ^8.1",
         "symfony/config": "^7.4 || ^8.1",
         "symfony/dependency-injection": "^7.4 || ^8.1",
