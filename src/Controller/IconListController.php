@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Twig\Environment;
 
 #[Route(
-    '%contao.backend.route_prefix%/svg-icon-picker/icons',
+    '_%contao.backend.route_prefix%/svg-icon-picker/icons',
     name: self::class,
     defaults: ['_scope' => 'backend'],
 )]
